@@ -5,7 +5,10 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 z-50 w-full bg-gradient-to-b from-black/80 to-transparent backdrop-blur-sm">
       <div className="px-4 py-6 flex items-center">
-        <Link href="/" className="text-4xl font-bold bg-gradient-to-r from-teal-400 to-blue-400 text-transparent bg-clip-text">
+        <Link 
+          href="/" 
+          className="text-4xl font-bold bg-gradient-to-r from-teal-400 to-blue-400 text-transparent bg-clip-text"
+        >
           FLIX & CHILL
         </Link>
         

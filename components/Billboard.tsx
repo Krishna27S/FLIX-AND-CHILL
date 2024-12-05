@@ -20,8 +20,10 @@ const Billboard = ({ movie }: BillboardProps) => {
         />
       )}
       <div className="absolute top-[40%] ml-4 md:ml-16">
-        <h1 className="text-5xl font-bold text-white">{movie?.title}</h1>
-        <p className="text-white text-lg mt-8 w-[90%] md:w-[80%] lg:w-[50%]">
+        <h1 className="text-5xl font-bold text-white mb-4">
+          {movie?.title}
+        </h1>
+        <p className="text-white text-lg mt-4 md:mt-8 w-[90%] md:w-[80%] lg:w-[50%]">
           {movie?.overview}
         </p>
       </div>
