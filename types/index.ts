@@ -1,5 +1,6 @@
 // types/index.ts
 export interface Movie {
+    first_air_date: unknown;
     id: number;
     title: string;
     poster_path: string;
