@@ -4,24 +4,28 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 export const fetchMovies = async (endpoint: string) => {
   try {
     if (!API_KEY) {
-      throw new Error('API key is not configured');
+      console.error('API key is missing in environment variables');
+      throw new Error('API configuration error');
     }
 
-    const response = await fetch(
-      `${BASE_URL}${endpoint}${endpoint.includes('?') ? '&' : '?'}api_key=${API_KEY}&language=en-US`
-    );
+    const url = `${BASE_URL}${endpoint}${endpoint.includes('?') ? '&' : '?'}api_key=${API_KEY}&language=en-US`;
+    console.log('Fetching from URL:', url.replace(API_KEY, 'HIDDEN')); // For debugging, hide the actual API key
+
+    const response = await fetch(url);
     
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      console.error('API Error:', errorData);
-      throw new Error(errorData.status_message || 'Failed to fetch data');
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
     
     const data = await response.json();
-    return data.results || [];
+    if (!data.results) {
+      throw new Error('Invalid response format');
+    }
+
+    return data.results;
   } catch (error) {
-    console.error('Error fetching movies:', error);
-    throw new Error('Failed to fetch data. Please try again later.');
+    console.error('Error details:', error);
+    throw new Error('Failed to fetch data. Please ensure API key is configured correctly.');
   }
 };
 
