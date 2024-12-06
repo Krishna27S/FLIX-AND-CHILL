@@ -1,12 +1,17 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import Navbar from '../components/layout/Navbar'  // Changed from { Navbar }
+import { SessionProvider } from 'next-auth/react';
+import type { AppProps } from 'next/app';
+import Navbar from '../components/layout/Navbar';
+import '../styles/globals.css';
 
-export default function App({ Component, pageProps }: AppProps): JSX.Element {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <>
-      <Navbar />
-      <Component {...pageProps} />
-    </>
-  )
+    <SessionProvider session={session}>
+      <div className="min-h-screen bg-black">
+        <Navbar />
+        <Component {...pageProps} />
+      </div>
+    </SessionProvider>
+  );
 }
+
+export default MyApp;
